@@ -3,7 +3,6 @@ import threading
 import nltk
 from nltk.chat.util import Chat, reflections
 
-# Define chatbot pairs
 pairs = [
     ['my name is (.*)', ['Hello! %1']],
     ['(hi|hello|hey|holla|hola)', ['Hey there!', 'Hi!', 'Hello!']],
@@ -21,7 +20,6 @@ pairs = [
     ["(ok|okay|okayy|k|oka)", ["Yes. Remember every minute counts!"]],
 ]
 
-# Initialize the chatbot
 chatbot = Chat(pairs, reflections)
 
 def print_study_check():
@@ -31,15 +29,13 @@ def print_study_check():
 
 def start_chat():
     while True:
-        user_input = input("-> ")  # Prepend arrow before user input
+        user_input = input("-> ")
         response = chatbot.respond(user_input)
         print("Pulse:", response)
 
 if __name__ == "__main__":
-    # Start the study check in a separate thread
     study_check_thread = threading.Thread(target=print_study_check)
-    study_check_thread.daemon = True  # Allows program to exit even if this thread is running
+    study_check_thread.daemon = True
     study_check_thread.start()
     
-    # Start the chatbot conversation
     start_chat()
